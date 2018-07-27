@@ -30,7 +30,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 
-app.get('/home', function (req, res) {
+app.get('/', function (req, res) {
     res.render('member' , {
     name: 'Bimbim',
     email: '2016-2018',
