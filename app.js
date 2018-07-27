@@ -6,13 +6,18 @@ const exphbs = require('express-handlebars');
 
 // instantiate client using your DB configurations
 const client = new Client({
-	database: 'd3jhms46r8qvej',
-	user: 'jbksyojpidykte',
-	password: 'ec3b5866d91f53e4b43e57d9290b41938a62ef053d332731d6be2ed58cac4ce5',
+	database: 'dfcu4m50k61tub',
+	user: 'kxkzszhbxpyiyj',
+	password: '9193147428f280f3e37af583f723085ba714caf33b1f547c8516cd63dbda08e4',
 	host: 'ec2-54-204-23-228.compute-1.amazonaws.com',
-	port: 5432
+	port: 5432,
+    ssl: true
 });
-
+//CREATE TABLE Products(id SERIAL PRIMARY KEY, name varchar(250), type varchar(250), description varchar(250), brand varchar(250), price float(50), pic varchar(250));
+//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Working Dogs', 'This distinctive-looking dog breed has a proud, independent spirit that some describe as catlike.', 'Chow Chow', 5000, '/chow.jpg');
+//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Companion Dogs', 'The Japanese Spitz is a small family companion with the heart of a large watchdog.', 'Japanese Spitz', 8000, '/spitz.jpg');
+//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Companion Dogs', 'His name means little lion, but theres nothing fierce about this dog breed. The Shih Tzu is a lover, not a hunter.', 'Shih Tzu', 9000, '/shih.jpg');
+//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Working Dogs', 'The Siberian Husky is a beautiful dog breed with a thick coat that comes in a multitude of colors and markings. Their blue or multi-colored eyes and striking facial masks only add to the appeal of this breed, which originated in Siberia.', 'Siberian Husky', 10000, '/husky.jpg');
 // connect to database
 client.connect()
 	.then(function() {
@@ -37,7 +42,7 @@ app.get('/', function (req, res) {
 });
 //
 
-app.get('/ellaine1', function (req, res) {
+app.get('/ellaine', function (req, res) {
     res.render('member' , {
     name: 'Ellaine E. Somido',
     email: 'ellainesomido@gmail.com',
@@ -48,7 +53,7 @@ app.get('/ellaine1', function (req, res) {
 });
 });
 
-app.get('/johnloyd1', function (req, res) {
+app.get('/johnloyd', function (req, res) {
     res.render('member' , {
     name: 'John Loyd P. Tan',
     email: 'tanjohnloyd3@gmail.com',
@@ -60,21 +65,13 @@ app.get('/johnloyd1', function (req, res) {
 });
 
 
-app.get('/handle', function (req, res) {
-    res.render('home');
-});
-
-app.get('/file', function(req, res) {
-	res.sendFile(__dirname + '/ellaine.html');
-});
-
-app.get('/home', function(req, res) {
-	res.send('<h1>Welcome</h1>');
-});
 
 app.get('/products', function(req, res) {
 	res.render('products', {
-	title: 'Top Products'
+	client.query('SELECT * FROM Products', (req, data)=>{
+        var list =[];
+        for (var i = 0; i<data.rows.length; i++){
+            list.push(data.rows[i]);
 	});
 });
 
