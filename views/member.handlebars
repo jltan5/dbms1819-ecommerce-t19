@@ -1,0 +1,28 @@
+<center>
+<div class="jumbotron text-center" height="300px" style="margin-bottom:0">
+   <img src="/{{imageUrl}}" height="300 px" width="300px">
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<a class="navbar-brand" href="#" align="center"><font size="24px" > {{name}}</font></a></nav>
+
+<div class="row">
+    <div class="col-3 bg-primary" >
+    	<b>E-mail Address:</b><br>
+    	{{email}}
+    	 </div>
+    <div class="col-3 bg-info">
+    	<b>Contact:</b><br>
+        {{phone}}
+	    </div>
+	<div class="col-3 bg-primary">
+		<b>Facebook Account:</b><br>
+		{{facebook}}
+    	 </div>
+    <div class="col-3 bg-info">
+    	<b>Hobbies:</b><br>
+    	<ul class="list-unstyled">{{#each hobbies}}<li>{{this}}</li>{{/each}}</ul>
+	    </div>
+
+
+</center>
