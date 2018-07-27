@@ -32,15 +32,10 @@ app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
     res.render('member' , {
-    name: 'Bimbim',
-    email: '2016-2018',
-    phone: 'chicken lover',
-    imageUrl: 'bim.jpg',
-    hobbies:['Sleeping', 'Running', 'Eating'],
-    facebook: 'Loved'
+    
 });
 });
-
+//
 
 app.get('/ellaine1', function (req, res) {
     res.render('member' , {
