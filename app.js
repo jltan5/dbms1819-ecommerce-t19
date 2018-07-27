@@ -10,8 +10,7 @@ const client = new Client({
 	user: 'kxkzszhbxpyiyj',
 	password: '9193147428f280f3e37af583f723085ba714caf33b1f547c8516cd63dbda08e4',
 	host: 'ec2-54-204-23-228.compute-1.amazonaws.com',
-	port: 5432,
-    ssl: true
+	port: 5432
 });
 //CREATE TABLE Products(id SERIAL PRIMARY KEY, name varchar(250), type varchar(250), description varchar(250), brand varchar(250), price float(50), pic varchar(250));
 //INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Working Dogs', 'This distinctive-looking dog breed has a proud, independent spirit that some describe as catlike.', 'Chow Chow', 5000, '/chow.jpg');
