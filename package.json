@@ -3,18 +3,31 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "scripts": {
-    " start": "node app.js"
+  "engines": {
+    "node": "10.6.0",
+    "npm": "6.1.0"
   },
-  "author": "team19",
-  "license": "ISC",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jomar Vista",
+  "license": "MIT",
   "dependencies": {
-    "bootstrap": "^4.1.2",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
-    "git": "^0.1.5",
-    "jquery": "^3.3.1",
-    "pg": "^7.4.3",
-    "popper.js": "^1.14.3"
-  }
+    "handlebars": "^4.0.11",
+    "nodemailer": "^4.6.7",
+    "pg": "^7.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bats1com/vistacortez51a2"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }

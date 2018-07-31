@@ -1,2 +1,2 @@
-# dbms1819-ecommerce-t19
-ELEC2 DBMS Module 1: ECommerce Webapp v1
+# dbms1819-ecommerce-t16
+Module 1: E-Commerce WebApp v1
