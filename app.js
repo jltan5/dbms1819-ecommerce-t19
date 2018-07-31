@@ -87,15 +87,15 @@ app.post('/products/:id/send', function(req, res) {
         port: 465,
         secure: true,
         auth: {
-            user: 'iemaniamailer@gmail.com', 
-            pass: 'custominearmonitors' 
+            user: 'team19dbms@gmail.com', 
+            pass: 'team19password' 
         }
     });
 
     let mailOptions = {
-        from: '"IEMania Mailer" <iemaniamailer@gmail.com>',
-        to: 'jdvista96@gmail.com, killerbats1com@gmail.com, drobscortz@gmail.com',
-        subject: 'IEMania Contact Request',
+        from: '"Team 19" <team19dbms@gmail.com>',
+        to: 'tanjohnloyd3@gmail.com',
+        subject: 'Dogs For Sale',
         html: output
     };
 
