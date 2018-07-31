@@ -121,25 +121,6 @@ app.post('/products/:id/send', function(req, res) {
      });
 });
 
-app.get('/member/1', function(req,res) {
-	res.render('member', {
-		name: 'Ellaine E. Somido',
-		email: 'ellainesomido@gmail.com',
-		phone: '09150410399',
-		imageurl: '/ellaine.jpg',
-		hobbies: ['Eating', 'Sleeping']
-	});
-});
-
-app.get('/member/2', function(req,res) {
-	res.render('member', {
-		name: 'John Loyd P. Tan',
-		email: 'tanjohnloyd3@gmail.com',
-		phone: '09150410399',
-		imageurl: '/johnloyd.jpg',
-		hobbies: ['Studying', 'Watching Anime and TV Series']
-	});
-});
 
 app.listen(3000,function() {
 	console.log('Server started at port 3000');
