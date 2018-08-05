@@ -31,8 +31,13 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+
+
+
+
 //module 2 starts here
-app.get('/brand/create', function(req,res) {
+app.get('/brand/create', function(res) {
 	res.render('brandcreate',{
 			data: list,
 			title: 'Create a Brand'
