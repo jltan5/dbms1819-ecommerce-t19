@@ -1,14 +1,6 @@
-<script>
-	function validateForm() {
-	    var x = document.forms["myForm"]["fname"].value;
-	    if (x == "") {
-	        alert("Name must be filled out");
-	        return false;
-	    }
-	}
-	</script>
-<form name="myForm" action="/brands"
-onsubmit="return validateForm()" method="post">
-Name: <input type="text" name="fname">
-<input type="submit" value="Submit">
-</form>
+
+<form action="/brands">
+  Brand name:<br>
+  <input type="text" name="brandname">
+  <input type="submit" value="Submit">
+</form> 
