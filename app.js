@@ -47,7 +47,7 @@ app.get('/brands', function(req,res) {
 		for (var i = 0; i < data.rows.length; i++) {
 			list.push(data.rows[i]);
 		}
-		res.render('home',{
+		res.render('brands',{
 			data: list,
 			title: 'Brand List'
 		});
