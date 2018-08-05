@@ -36,8 +36,8 @@ app.use(bodyParser.json());
 //module 2 staasasdadasdadasdasdasdnnnnnnasdaa
 
 app.get('/brand/create', function (req, res) {
- res.render('brandcreate',
- 	title: 'Create a Brand');
+ res.render('brandcreate',{
+ 	title: 'Create a Brand'});
 });
 
 
