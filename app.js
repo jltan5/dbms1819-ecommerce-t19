@@ -22,12 +22,6 @@ client.connect()
 	.catch(function() {
 		console.log('Error');
 	})
-//CREATE TABLE Products(id SERIAL PRIMARY KEY, name varchar(250), type varchar(250), description varchar(250), brand varchar(250), price float(50), pic varchar(250));
-//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Working Dogs', 'This distinctive-looking dog breed has a proud, independent spirit that some describe as catlike.', 'Chow Chow', 5000, '/chow.jpg');
-//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Companion Dogs', 'The Japanese Spitz is a small family companion with the heart of a large watchdog.', 'Japanese Spitz', 8000, '/spitz.jpg');
-//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Companion Dogs', 'His name means little lion, but theres nothing fierce about this dog breed. The Shih Tzu is a lover, not a hunter.', 'Shih Tzu', 9000, '/shih.jpg');
-//INSERT INTO Products(name, type, description, brand, price, pic) VALUES('Unnamed', 'Working Dogs', 'The Siberian Husky is a beautiful dog breed with a thick coat that comes in a multitude of colors and markings. Their blue or multi-colored eyes and striking facial masks only add to the appeal of this breed, which originated in Siberia.', 'Siberian Husky', 10000, '/husky.jpg');
-// connect to database
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,6 +32,60 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+app.get('/brand/create', function(req,res) {
+	res.render('brandcreate',{
+			data: list,
+			title: 'Create a Brand'
+	});
+});
+
+app.get('/brands', function(req,res) {
+	client.query('SELECT * FROM brands', (req, data)=>{
+		var list = [];
+		for (var i = 0; i < data.rows.length; i++) {
+			list.push(data.rows[i]);
+		}
+	res.render('home',{
+			data: list,
+			title: 'Brand List'
+	});
+});
+
+app.get('/category/create', function(req,res) {
+	res.render('categorycreate',{
+			data: list,
+			title: 'Create a Category'
+	});
+});
+
+app.get('/categories', function(req,res) {
+	client.query('SELECT * FROM products_category', (req, data)=>{
+		var list = [];
+		for (var i = 0; i < data.rows.length; i++) {
+			list.push(data.rows[i]);
+		}
+	res.render('home',{
+			data: list,
+			title: 'Category List'
+	});
+});
+
+app.get('/product/create', function(req,res) {
+});
+
+app.get('/product/update', function(req,res) {
+});
+
+
+
+
+
+
+
+
+
+
+
 app.get('/', function(req,res) {
 	client.query('SELECT * FROM Products', (req, data)=>{
 		var list = [];
@@ -46,7 +94,7 @@ app.get('/', function(req,res) {
 		}
 		res.render('home',{
 			data: list,
-			title: 'Dogs For Sale'
+			title: 'Product List'
 		});
 	});
 });
