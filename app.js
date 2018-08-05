@@ -36,10 +36,10 @@ app.use(bodyParser.json());
 //module 2 starts here
 
 app.get('/brand/create', function (req, res) {
-  res.send('brandcreate', {
+  res.send('brandcreate',{
   	tile: 'Create a Brand'
   });
-})
+});
 
 
 
