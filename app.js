@@ -42,18 +42,17 @@ app.get('/brand/create', function(req,res) {
 
 
 app.get('/brands', function(req,res) {
-	client.query('SELECT * FROM brands', (req, data)=>{
+	client.query('SELECT * FROM Brands', (req, data)=>{
 		var list = [];
 		for (var i = 0; i < data.rows.length; i++) {
 			list.push(data.rows[i]);
 		}
-	res.render('home',{
+		res.render('home',{
 			data: list,
 			title: 'Brand List'
-	});
+		});
 	});
 });
-
 
 
 app.get('/category/create', function(req,res) {
