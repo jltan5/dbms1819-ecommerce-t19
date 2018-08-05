@@ -55,14 +55,10 @@ app.get('/brands', function(req,res) {
 	});
 });
 
-
-app.get('/category/create', function(req,res) {
-	res.render('categorycreate',{
-			data: list,
-			title: 'Create a Category'
-	});
+app.get('/category/create', function (req, res) {
+ res.render('categorycreate',{
+ 	title: 'Create a Category'});
 });
-
 
 
 app.get('/categories', function(req,res) {
