@@ -33,12 +33,11 @@ app.use(bodyParser.json());
 
 
 
-//module 2 starts here
+//module 2 staasasdadasdadasdasdasdnnnnnnasdaa
 
 app.get('/brand/create', function (req, res) {
-  res.send('brandcreate'});
+ res.render('brandcreate'});
 });
-
 
 
 
