@@ -31,13 +31,15 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+//module 2 starts here
 app.get('/brand/create', function(req,res) {
 	res.render('brandcreate',{
 			data: list,
 			title: 'Create a Brand'
 	});
 });
+
+
 
 app.get('/brands', function(req,res) {
 	client.query('SELECT * FROM brands', (req, data)=>{
@@ -49,7 +51,10 @@ app.get('/brands', function(req,res) {
 			data: list,
 			title: 'Brand List'
 	});
+	});
 });
+
+
 
 app.get('/category/create', function(req,res) {
 	res.render('categorycreate',{
@@ -57,6 +62,8 @@ app.get('/category/create', function(req,res) {
 			title: 'Create a Category'
 	});
 });
+
+
 
 app.get('/categories', function(req,res) {
 	client.query('SELECT * FROM products_category', (req, data)=>{
@@ -68,10 +75,15 @@ app.get('/categories', function(req,res) {
 			data: list,
 			title: 'Category List'
 	});
+	});
 });
+
+
 
 app.get('/product/create', function(req,res) {
 });
+
+
 
 app.get('/product/update', function(req,res) {
 });
