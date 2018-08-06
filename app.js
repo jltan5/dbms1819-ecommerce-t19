@@ -131,10 +131,6 @@ app.get('/categories', function(req,res) {
 
 
 
-app.get('/product/create', function(req,res) {
-});
-
-
 app.get('/product/create', (req,res)=>{	//CREATE PRODUCT html
 	client.query('SELECT * FROM products_category', (req, data)=>{
 		var list = [];
