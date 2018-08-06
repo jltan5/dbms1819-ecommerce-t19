@@ -84,7 +84,7 @@ app.post('/categories', function(req,res){ //category list with insert new categ
 	values = [req.body.category_name];
 	console.log(req.body);
 	console.log(values);
-	client.query("INSERT INTO products_category(category_name) VALUES($1)", values, (err, res)=>{
+	client.query("INSERT INTO products_category(name) VALUES($1)", values, (err, res)=>{
 		if (err) {
 			console.log(err.stack)
 			}
