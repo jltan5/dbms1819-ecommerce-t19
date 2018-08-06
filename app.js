@@ -46,7 +46,7 @@ app.post('/brands', function(req,res) { //brand list insert
 	values = [req.body.brand_name,req.body.brand_description];
 	console.log(req.body);
 	console.log(values);
-	client.query("INSERT INTO brands(name, description) VALUES('".$_POST["brand_name"]."', '".$_POST["brand_description"]."')", values, (err, res)=>{
+	client.query("INSERT INTO brands(name, description) VALUES($1, $2)", values, (err, res)=>{
 		if (err) {
 			console.log(err.stack)
 			}
