@@ -4,16 +4,16 @@
   Product name:
   <input type="text" name="product_name" required=""><br>
   Product price:
-  <input type="text" name="product_name" required=""><br>
+  <input type="text" name="product_price" required=""><br>
   Product category:
-  <select name="category_id" class="form-control" required="">
+  <select name="product_category" class="form-control" required="">
 			<option value="">Pick a category</option>
 			{{#each data}}
 			<option value="{{this.id}}">{{this.category_name}}</option>
 			{{/each}}
 	</select><br>
 	Product brand:
-	<select name="brand_id" class="form-control" required="">
+	<select name="product_brand" class="form-control" required="">
 			<option value=''>Choose one..</option>
 			{{#each data2}}
 			<option value='{{this.id}}'>{{this.brand_name}}</option>
