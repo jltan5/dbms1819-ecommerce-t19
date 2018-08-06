@@ -3,17 +3,23 @@
 <form action="/" method="POST">
   Product name:
   <input type="text" name="product_name" required=""><br>
+  Product description:
+  <input type="text" name="product_description"><br>
+  Product tagline:
+  <input type="text" name="product_tagline" required=""><br>
   Product price:
   <input type="text" name="product_price" required=""><br>
+  Product warranty:
+  <input type="text" name="product_warranty" required=""><br>
   Product category:
-  <select name="product_category" class="form" required="">
+  <select name="category_id" class="form" required="">
 			<option value="">Pick a category</option>
 			{{#each data}}
 			<option value="{{this.id}}">{{this.name}}</option>
 			{{/each}}
 	</select><br>
 	Product brand:
-	<select name="product_brand" class="form" required="">
+	<select name="brand_id" class="form" required="">
 			<option value=''>Choose one..</option>
 			{{#each data2}}
 			<option value='{{this.id}}'>{{this.name}}</option>
