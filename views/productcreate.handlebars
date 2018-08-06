@@ -6,11 +6,11 @@
   Product description:
   <input type="text" name="product_description"><br>
   Product tagline:
-  <input type="text" name="product_tagline" required=""><br>
+  <input type="text" name="product_tagline"><br>
   Product price:
   <input type="text" name="product_price" required=""><br>
   Product warranty:
-  <input type="text" name="product_warranty" required=""><br>
+  <input type="text" name="product_warranty"><br>
   Product category:
   <select name="category_id" class="form" required="">
 			<option value="">Pick a Category</option>
@@ -25,6 +25,8 @@
 			<option value='{{this.id}}'>{{this.name}}</option>
 			{{/each}}
 	</select>
+	Image Link:
+  <input type="text" name="image_link"><br>
   <input type="submit" value="Submit">
 </form> 
 </center>
