@@ -79,7 +79,7 @@ app.get('/category/create', function (req, res) {
 
 
 
-app.post('/categories', function(req,res){ //category list with insert new category query
+app.post('/categories', function(req,res) { //brand list insert 
 	var values =[];
 	values = [req.body.category_name];
 	console.log(req.body);
@@ -94,7 +94,6 @@ app.post('/categories', function(req,res){ //category list with insert new categ
 	});
 	res.redirect('/categories');
 });
-
 
 
 
