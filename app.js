@@ -157,8 +157,8 @@ app.get('/product/create', (req,res)=>{	//CREATE PRODUCT html
 app.post('/', function(req,res) { //product list with insert new product
 	var values =[];
 	values = [req.body.product_name,req.body.product_price,req.body.product_category,req.body.product_brand];
-	console.log(req.body);
-	console.log(values);
+	//console.log(req.body);
+	//console.log(values);
 	client.query("INSERT INTO products(name, price, category_id, brand_id) VALUES($1, $2, $3, $4)", values, (err, res)=>{
 		if (err) {
 			console.log(err.stack)
