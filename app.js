@@ -59,16 +59,6 @@ app.post('/brands', function(req,res) { //brand list insert
 
 
 
-
-
-
-
-
-
-
-
-
-
 app.get('/brands', function(req,res) {
 	client.query('SELECT * FROM Brands', (req, data)=>{
 		var list = [];
@@ -86,6 +76,27 @@ app.get('/category/create', function (req, res) {
  res.render('categorycreate',{
  	title: 'Create a Category'});
 });
+
+
+
+app.post('/categories', function(req,res){ //category list with insert new category query
+	var values =[];
+	values = [req.body.category_name];
+	console.log(req.body);
+	console.log(values);
+	client.query("INSERT INTO products_category(category_name) VALUES($1)", values, (err, res)=>{
+		if (err) {
+			console.log(err.stack)
+			}
+		else {
+			console.log(res.rows[0])
+		}
+	});
+	res.redirect('/categories');
+});
+
+
+
 
 
 app.get('/categories', function(req,res) {
