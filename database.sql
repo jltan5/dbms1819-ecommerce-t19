@@ -16,7 +16,8 @@ CREATE TABLE "products" (
   "price" FLOAT(2),
   "warranty" INT,
   "category_id" INT REFERENCES products_category(id),
-  "brand_id" INT REFERENCES brands(id)
+  "brand_id" INT REFERENCES brands(id),
+  "image" VARCHAR(250)
 );
 
 CREATE TABLE "orders" (
@@ -45,5 +46,3 @@ CREATE TABLE "brands" (
   "name" VARCHAR(80),
   "description" VARCHAR(250)
 );
-
-INSERT INTO brands (name, description) VALUES ('ellaine', 'mataba');
