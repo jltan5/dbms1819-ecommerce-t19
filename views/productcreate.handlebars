@@ -1,0 +1,24 @@
+<h1 class="mt-0 mb-5 text-center">{{title}}</h1>
+<center>
+<form action="/categories" method="POST">
+  Product name:
+  <input type="text" name="product_name" required=""><br>
+  Product price:
+  <input type="text" name="product_name" required=""><br>
+  Product category:
+  <select name="category_id" class="form-control" required="">
+			<option value="">Pick a category</option>
+			{{#each data}}
+			<option value="{{this.id}}">{{this.category_name}}</option>
+			{{/each}}
+	</select><br>
+	Product brand:
+	<select name="brand_id" class="form-control" required="">
+			<option value=''>Choose one..</option>
+			{{#each data2}}
+			<option value='{{this.id}}'>{{this.brand_name}}</option>
+			{{/each}}
+	</select>
+  <input type="submit" value="Submit">
+</form> 
+</center>
