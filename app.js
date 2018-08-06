@@ -41,6 +41,33 @@ app.get('/brand/create', function (req, res) {
 });
 
 
+app.post('/brands', function(req,res) { //brand list insert 
+	var values =[];
+	values = [req.body.brand_name,req.body.brand_description];
+	console.log(req.body);
+	console.log(values);
+	client.query("INSERT INTO brands(name, description) VALUES('".$_POST["brand_name"]."', '".$_POST["brand_description"]."')", values, (err, res)=>{
+		if (err) {
+			console.log(err.stack)
+			}
+		else {
+			console.log(res.rows[0])
+		}
+	});
+	res.redirect('/brands');
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/brands', function(req,res) {
 	client.query('SELECT * FROM Brands', (req, data)=>{
