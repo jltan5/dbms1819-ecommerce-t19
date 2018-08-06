@@ -33,7 +33,25 @@ app.use(bodyParser.json());
 
 
 
-//module 2 staasasdadasdadasdasdasdnnnnnnasdaa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//module 2 starts HERE
 
 app.get('/brand/create', function (req, res) {
  res.render('brandcreate',{
@@ -117,9 +135,54 @@ app.get('/product/create', function(req,res) {
 });
 
 
+app.get('/product/create', (req,res)=>{	//CREATE PRODUCT html
+	client.query('SELECT * FROM products_category', (req, data)=>{
+		var list = [];
+		for (var i = 1; i < data.rows.length+1; i++) {
+				list.push(data.rows[i-1]);
+		}
+		client.query('SELECT * FROM brands', (req, data)=>{
+			var list2 = [];
+			for (var i = 1; i < data.rows.length+1; i++) {
+					list2.push(data.rows[i-1]);
+			}
+			res.render('productcreate',{
+				data: list,
+				data2: list2
+			});
+		});
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/product/update', function(req,res) {
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
