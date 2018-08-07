@@ -187,7 +187,7 @@ app.post('/products/:id', function(req,res) {
 	console.log(req.body);
 	console.log(values);
 	client.query("UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, category_id = $7, brand_id = $8, image = $9 WHERE id = $1", values);
-	res.redirect('/products/:id');
+	res.redirect('/products/1');
 });
 
 
