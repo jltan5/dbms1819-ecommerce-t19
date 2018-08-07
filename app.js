@@ -192,20 +192,23 @@ app.get('/product/update/:id', (req,res)=>{	//CREATE PRODUCT html
 });
 
 
-app.post('/products/:id', function(req,res){
-	console.log(req.body);
+
+app.post('/', function(req,res) {
 	var id = req.params.id;
 	var values =[];
-	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.image_link,req.body.category_id,req.body.brand_id];
-	//
-	//for updating via post -----------------------------------------------------WIP
+	values = [req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.category_id,req.body.brand_id,req.body.image_link];
+	console.log(req.body);
 	console.log(values);
-	client.query('UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, image = $7, category_id = $8, brand_id = $9 WHERE id = $1', values);
-	res.redirect('/products/:id');
+	client.query("UPDATE products SET name = $1", values, (err, res)=>{
+		if (err) {
+			console.log(err.stack)
+			}
+		else {
+			console.log(res.rows[0])
+		}
+	});
+	res.redirect('/');
 });
-
-
-
 
 
 
