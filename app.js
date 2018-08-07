@@ -32,27 +32,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//module 2 starts HERE
-
 app.get('/brand/create', function (req, res) {
  res.render('brandcreate',{
  	title: 'Create a Brand'});
@@ -131,7 +110,7 @@ app.get('/categories', function(req,res) {
 
 
 
-app.get('/product/create', (req,res)=>{	//CREATE PRODUCT html
+app.get('/product/create', (req,res)=>{	
 	client.query('SELECT * FROM products_category', (req, data)=>{
 		var list = [];
 		for (var i = 1; i < data.rows.length+1; i++) {
@@ -170,8 +149,14 @@ app.post('/', function(req,res) {
 
 
 
-app.get('/product/update/:id', (req,res)=>{	//CREATE PRODUCT html
+app.get('/product/update/:id', (req,res)=>{	
 	var id = req.params.id;
+
+	client.query('SELECT * FROM products', (req, data)=>{
+		var list = [];
+		for (var i = 1; i < data.rows.length+1; i++) {
+				list.push(data.rows[i-1]);
+		}
 	client.query('SELECT * FROM products_category', (req, data)=>{
 		var list = [];
 		for (var i = 1; i < data.rows.length+1; i++) {
@@ -183,6 +168,7 @@ app.get('/product/update/:id', (req,res)=>{	//CREATE PRODUCT html
 					list2.push(data.rows[i-1]);
 			}
 			res.render('update',{
+				data3: list3,
 				data: list,
 				data2: list2,
 				title: 'Brand List'
@@ -193,13 +179,13 @@ app.get('/product/update/:id', (req,res)=>{	//CREATE PRODUCT html
 
 
 
-app.post('/', function(req,res) {
+app.post('/products/:id', function(req,res) {
 	var id = req.params.id;
 	var values =[];
-	values = [req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.category_id,req.body.brand_id,req.body.image_link];
+	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.category_id,req.body.brand_id,req.body.image_link];
 	console.log(req.body);
 	console.log(values);
-	client.query("UPDATE products SET name = $1", values, (err, res)=>{
+	client.query("UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, category_id = $7, brand_id = 8, image = $9 WHERE id = $1", values, (err, res)=>{
 		if (err) {
 			console.log(err.stack)
 			}
