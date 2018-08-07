@@ -168,7 +168,7 @@ app.get('/product/update/:id', (req,res)=>{
 				for (var i = 1; i < data.rows.length+1; i++) {
 					list3.push(data.rows[i-1]);
 				}
-				res.render('product_update',{
+				res.render('update',{
 					products: list,
 					category: list2,
 					brands: list3
@@ -185,8 +185,6 @@ app.post('/products/:id', function(req,res){
 	var id = req.params.id;
 	var values =[];
 	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.product_image,req.body.category_id,req.body.brand_id];
-	//
-	//for updating via post -----------------------------------------------------WIP
 	console.log(values);
 	client.query('UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, image = $7, category_id = $8, brand_id = $9 WHERE id = $1', values);
 	res.redirect('/products/:id');
