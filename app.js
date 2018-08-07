@@ -217,7 +217,7 @@ products.brand_id AS user, brands.name AS favorite FROM brands JOIN products ON 
 
 app.get('/products/:id', (req,res)=>{
 	var id = req.params.id;
-	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.name, products.brand_id, brands.name FROM products JOIN brands ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
+	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.name, products.brand_id, brands.name FROM brands JOIN products ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
 		var list = [];
 		//console.log(data);
 		for (var i = 0; i < data.rows.length+1; i++) {
