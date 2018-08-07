@@ -201,7 +201,7 @@ app.post('/products/:id', function(req,res){
 	console.log(req.body);
 	var id = req.params.id;
 	var values =[];
-	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.image_link,req.body.category_id,req.body.brand_id];
+	values = [req.body.product_id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.image_link,req.body.category_id,req.body.brand_id];
 	console.log(values);
 	client.query('UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, image = $7, category_id = $8, brand_id = $9 WHERE id = $1', values);
 	res.redirect('/products/'+id);

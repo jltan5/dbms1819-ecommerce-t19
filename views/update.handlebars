@@ -2,8 +2,10 @@
 <center>
   {{#each products}}
 <form action="/products/{{this.id}}" method="POST">
+  <input type="text" readonly="" name="product_id" value="{{this.id}}"><br>
   {{/each}}
   Product name:
+  
   <input type="text" name="product_name" required=""><br>
   Product description:
   <input type="text" name="product_description"><br>
