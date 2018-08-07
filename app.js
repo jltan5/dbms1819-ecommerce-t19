@@ -151,7 +151,7 @@ app.post('/', function(req,res) {
 
 app.get('/product/update/:id', (req,res)=>{
 	var id = req.params.id;
-	client.query('SELECT products.id' , (req, data)=>{
+	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
 		var list = [];
 		for (var i = 1; i < data.rows.length+1; i++) {
 			if (i==id) {
