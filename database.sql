@@ -38,11 +38,11 @@ CREATE TABLE "customer_favorite_products" (
 
 CREATE TABLE "products_category" (
   "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR(80)
+  "category_name" VARCHAR(80)
 );
 
 CREATE TABLE "brands" (
   "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR(80),
+  "brand_name" VARCHAR(80),
   "description" VARCHAR(250)
 );

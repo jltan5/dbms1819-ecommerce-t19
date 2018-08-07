@@ -15,14 +15,14 @@
   <select name="category_id" class="form" required="">
 			<option value="">Pick a Category</option>
 			{{#each data}}
-			<option value="{{this.id}}">{{this.name}}</option>
+			<option value="{{this.id}}">{{this.category_name}}</option>
 			{{/each}}
 	</select><br>
 	Product brand:
 	<select name="brand_id" class="form" required="">
 			<option value=''>Pick a Brand</option>
 			{{#each data2}}
-			<option value='{{this.id}}'>{{this.name}}</option>
+			<option value='{{this.id}}'>{{this.brand_name}}</option>
 			{{/each}}
 	</select><br>
 	Image Link:

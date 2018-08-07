@@ -64,7 +64,7 @@ app.post('/brands', function(req,res) {
 	values = [req.body.brand_name,req.body.brand_description];
 	console.log(req.body);
 	console.log(values);
-	client.query("INSERT INTO brands(name, description) VALUES($1, $2)", values, (err, res)=>{
+	client.query("INSERT INTO brands(brand_name, description) VALUES($1, $2)", values, (err, res)=>{
 		if (err) {
 			console.log(err.stack)
 			}
@@ -102,7 +102,7 @@ app.post('/categories', function(req,res) {
 	values = [req.body.category_name];
 	console.log(req.body);
 	console.log(values);
-	client.query("INSERT INTO products_category(name) VALUES($1)", values, (err, res)=>{
+	client.query("INSERT INTO products_category(category_name) VALUES($1)", values, (err, res)=>{
 		if (err) {
 			console.log(err.stack)
 			}
@@ -217,7 +217,7 @@ app.get('/', function(req,res) {
 
 app.get('/products/:id', (req,res)=>{
 	var id = req.params.id;
-	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.name, products.brand_id, brands.name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
+	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
 		var list = [];
 		//console.log(data);
 		for (var i = 0; i < data.rows.length+1; i++) {
