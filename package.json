@@ -11,7 +11,7 @@
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jomar Vista",
+  "author": "John Loyd Tan",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bats1com/vistacortez51a2"
+    "url": "https://github.com/jltan5/dbms1819-ecommerce-t19"
   },
   "keywords": [
     "node",

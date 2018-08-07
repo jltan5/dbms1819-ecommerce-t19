@@ -123,7 +123,8 @@ app.get('/product/create', (req,res)=>{
 			}
 			res.render('productcreate',{
 				data: list,
-				data2: list2
+				data2: list2,
+				title: 'Create Product'
 			});
 		});
 	});
@@ -188,7 +189,8 @@ app.get('/product/update/:id', (req,res)=>{
 				res.render('update',{
 					products: list,
 					category: list2,
-					brands: list3
+					brands: list3,
+					title: 'Update Product'
 				});
 			});
 		});

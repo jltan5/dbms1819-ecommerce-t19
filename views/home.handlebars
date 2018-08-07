@@ -1,19 +1,40 @@
-
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
+		  <ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/categories"><p font="Tekton Pro">Categories</p><span class="sr-only">(current)
+						</span></a>
+					</li>
+		        </ul>	
+		</nav>
+		<br>
+	
+		
 	<div>
-		<h1 class="mt-0 mb-5 text-center">{{title}}</h1>
-		<a href="/product/create">Create a product</a>
+
+		<b><h1 class="mt-2 mb-0 text-center">{{title}}</h1></b>
+			
+			<center>
+				<a href="/product/create" type="button"  class="btn btn-info btn-sm" style="margin-bottom: 50px;">CREATE A PRODUCT</a>
+			</center>
+			
 		<div class="row mx-4">
 			{{#each data}}
-	<div class="col-lg-4 col-md-4 col-sm-12 mb-4 mx-auto">
-	<div class="card bg-secondary text-light center">
-		<a href="/products/{{this.id}}" class="text-light">
-		<img class="card-img-top" src="{{this.image}}" width="400" height="300">
-	<div class="">
-	<h6 class="card-title text-center my-3">{{this.name}}</h5>
-		</div>
-		</a>
-	</div>
-	</div>
-			{{/each}}
-	</div>
-	</div>
+			<div class="col-lg-4 col-md-4 col-sm-12 mb-4 mx-auto">
+			<div class="card bg-secondary text-light center">
+				<a href="/products/{{this.id}}" class="text-light">
+				<img class="card-img-top" src="{{this.image}}" width="400" height="300">
+			<div class="">
+			<h6 class="card-title text-center my-3">{{this.name}}</h5>
+				</div>
+				</a>
+			</div>
+			</div>
+					{{/each}}
+			</div>
+			</div>

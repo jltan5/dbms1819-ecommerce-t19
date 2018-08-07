@@ -1,12 +1,31 @@
+	<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
+		  <ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/categories"><p font="Tekton Pro">Categories</p><span class="sr-only">(current)
+						</span></a>
+					</li>
+		        </ul>	
+		</nav>
+		<br>
+
 	<div>
-		<h1 class="mt-0 mb-5 text-center">{{title}}</h1>
-		<a href="/brand/create">Create a Brand</a>
-		<div class="row mx-4">
+		<b><h1 class="mt-2 mb-1 text-center">{{title}}</h1></b>
+		<center>
+			<a href="/brand/create" type="button" class="btn btn-info btn-sm" style="margin-bottom: 50px;">CREATE A BRAND</a>
+	</center>
+	
+	<div class="row mx-4">
 			{{#each data}}
 			<div class="col-lg-4 col-md-4 col-sm-12 mb-4 mx-auto">
-				<div class="">
-					<h5 class="card-title my-3">{{this.brand_name}}</h5>
-					<h7 class="">{{this.description}}</h7>
+				<div class="bg-light" style="word-wrap: break-word;">
+					<h3 class="bg-primary text-white text-center p-3">{{this.brand_name}}</h3>	
+					<h7 class="bg-light text-dark p-2">Description: {{this.description}}</h7></div>
 				</div>
 			</div>
 			{{/each}}

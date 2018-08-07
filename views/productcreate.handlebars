@@ -1,32 +1,59 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/categories"><p font="Tekton Pro">Categories</p><span class="sr-only">(current)
+            </span></a>
+          </li>
+            </ul> 
+    </nav>
+    <br>
+
 <h1 class="mt-0 mb-5 text-center">{{title}}</h1>
 <center>
 <form action="/" method="POST">
-  Product name:
-  <input type="text" name="product_name" required=""><br>
-  Product description:
-  <input type="text" name="product_description"><br>
-  Product tagline:
-  <input type="text" name="product_tagline"><br>
-  Product price:
-  <input type="text" name="product_price" required=""><br>
-  Product warranty:
-  <input type="text" name="product_warranty"><br>
-  Product category:
+  <table>
+<tr> <td>
+  Product name:</td><td>
+  <input type="text" name="product_name" required=""></td></tr>
+<tr> <td>
+  Product description:</td><td>
+  <input type="text" name="product_description"></td></tr>
+<tr> <td>
+  Product tagline:</td><td>
+  <input type="text" name="product_tagline"></td></tr>
+<tr> <td>
+  Product price:</td><td>
+  <input type="text" name="product_price" required=""></td></tr>
+<tr> <td>
+  Product warranty:</td><td>
+  <input type="text" name="product_warranty"></td></tr>
+<tr> <td>
+  Product category:</td><td>
   <select name="category_id" class="form" required="">
 			<option value="">Pick a Category</option>
 			{{#each data}}
 			<option value="{{this.id}}">{{this.category_name}}</option>
 			{{/each}}
-	</select><br>
-	Product brand:
+	</select></td></tr>
+<tr> <td>
+	Product brand:</td><td>
 	<select name="brand_id" class="form" required="">
 			<option value=''>Pick a Brand</option>
 			{{#each data2}}
 			<option value='{{this.id}}'>{{this.brand_name}}</option>
 			{{/each}}
-	</select><br>
-	Image Link:
-  <input type="text" name="image_link"><br>
-  <input type="submit" value="Submit">
+	</select></td></tr>
+<tr> <td>
+	Image Link:</td><td>
+  <input type="text" name="image_link"></td></tr>
+  <tr><td> &nbsp; </td></tr>
+ <tr><td></td><td> <input type="submit" value="Submit"></td></tr>
+</table>
 </form> 
 </center>
