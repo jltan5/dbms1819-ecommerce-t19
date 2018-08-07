@@ -186,14 +186,7 @@ app.post('/products/:id', function(req,res) {
 	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.category_id,req.body.brand_id,req.body.image_link];
 	console.log(req.body);
 	console.log(values);
-	client.query("UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, category_id = $7, brand_id = $8, image = $9 WHERE id = $1", values, (err, res)=>{
-		if (err) {
-			console.log(err.stack)
-			}
-		else {
-			console.log(res.rows[0])
-		}
-	});
+	client.query("UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, category_id = $7, brand_id = $8, image = $9 WHERE id = $1", values);
 	res.redirect('/products/:id');
 });
 
