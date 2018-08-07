@@ -15,7 +15,7 @@
   Product category:
   <select name="category_id" class="form" required="">
 			<option value="">Pick a Category</option>
-			{{#each products_category}}
+			{{#each category}}
 			<option value="{{this.id}}">{{this.category_name}}</option>
 			{{/each}}
 	</select><br>

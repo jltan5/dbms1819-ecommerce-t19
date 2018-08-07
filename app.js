@@ -193,7 +193,7 @@ app.get('/product/update/:id', (req,res)=>{
 				}
 				res.render('update',{
 					products: list,
-					products_category: list2,
+					category: list2,
 					brands: list3
 				});
 			});
