@@ -181,6 +181,7 @@ app.get('/product/update/:id', (req,res)=>{
 
 
 app.post('/products/:id', function(req,res) {
+	var id = req.params.id;
 	var values =[];
 	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.category_id,req.body.brand_id,req.body.image_link];
 	console.log(req.body);
