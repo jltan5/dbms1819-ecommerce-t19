@@ -261,7 +261,7 @@ app.post('/products/:id/send', function(req, res) {
     let mailOptions = {
         from: '"Team 19" <team19dbms@gmail.com>',
         to: 'tanjohnloyd3@gmail.com',
-        subject: 'Dogs For Sale',
+        subject: 'WebApp module 2',
         html: output
     };
 
