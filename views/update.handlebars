@@ -2,6 +2,7 @@
 <center>
   {{#each products}}
 <form action="/products/{{this.id}}" method="POST">
+  {{/each}}
   Product name:
   <input type="text" name="product_name" required=""><br>
   Product description:
@@ -28,7 +29,7 @@
   </select><br>
   Image Link:
   <input type="text" name="image_link"><br>
-  {{/each}}
+
   <input type="submit" value="Submit">
 </form> 
 </center>
