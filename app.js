@@ -283,7 +283,7 @@ app.post('/products/:id/send', function(req, res) {
 			}
 			res.render('products',{
 				data: list,
-				msg: '---Email has been sent---'
+				msg: 'Thank You! Email has been sent to the Seller'
 			});
 		});
      });
