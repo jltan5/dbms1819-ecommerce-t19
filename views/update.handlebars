@@ -1,0 +1,34 @@
+<h1 class="mt-0 mb-5 text-center">{{title}}</h1>
+<center>
+  {{#each data3}}
+<form action="/products/{{this.id}}" method="POST">
+  {{/each}}
+  Product name:
+  <input type="text" name="product_name" required=""><br>
+  Product description:
+  <input type="text" name="product_description"><br>
+  Product tagline:
+  <input type="text" name="product_tagline"><br>
+  Product price:
+  <input type="text" name="product_price" required=""><br>
+  Product warranty:
+  <input type="text" name="product_warranty"><br>
+  Product category:
+  <select name="category_id" class="form" required="">
+      <option value="">Pick a Category</option>
+      {{#each data}}
+      <option value="{{this.id}}">{{this.category_name}}</option>
+      {{/each}}
+  </select><br>
+  Product brand:
+  <select name="brand_id" class="form" required="">
+      <option value=''>Pick a Brand</option>
+      {{#each data2}}
+      <option value='{{this.id}}'>{{this.brand_name}}</option>
+      {{/each}}
+  </select><br>
+  Image Link:
+  <input type="text" name="image_link"><br>
+  <input type="submit" value="Submit">
+</form> 
+</center>
