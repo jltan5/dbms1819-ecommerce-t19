@@ -206,7 +206,7 @@ app.post('/products/:id', function(req,res){
 	console.log(req.body);
 	var id = req.params.id;
 	var values =[];
-	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.tagline,req.body.price,req.body.warranty,req.body.pic,req.body.category_id,req.body.brand_id];
+	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.image_link,req.body.category_id,req.body.brand_id];
 	//
 	//for updating via post -----------------------------------------------------WIP
 	console.log(values);
