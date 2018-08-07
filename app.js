@@ -147,6 +147,23 @@ app.post('/', function(req,res) {
 	res.redirect('/');
 });
 
+app.get('/', function(req,res) {
+	client.query('SELECT * FROM Products', (req, data)=>{
+		var list = [];
+		for (var i = 0; i < data.rows.length; i++) {
+			list.push(data.rows[i]);
+		}
+		res.render('home',{
+			data: list,
+			title: 'Product List'
+		});
+	});
+});
+
+
+
+
+
 
 
 app.get('/product/update/:id', (req,res)=>{
@@ -180,29 +197,16 @@ app.get('/product/update/:id', (req,res)=>{
 
 
 
-app.post('/products/:id', function(req,res) {
+app.post('/products/:id', function(req,res){
+	console.log(req.body);
 	var id = req.params.id;
 	var values =[];
-	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.category_id,req.body.brand_id,req.body.image_link];
-	console.log(req.body);
+	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.image_link,req.body.category_id,req.body.brand_id];
 	console.log(values);
-	client.query("UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, category_id = $7, brand_id = $8, image = $9 WHERE id = $1", values);
-	res.redirect('/products/1');
+	client.query('UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, image = $7, category_id = $8, brand_id = $9 WHERE id = $1', values);
+	res.redirect('/products/:id');
 });
 
-
-app.get('/', function(req,res) {
-	client.query('SELECT * FROM Products', (req, data)=>{
-		var list = [];
-		for (var i = 0; i < data.rows.length; i++) {
-			list.push(data.rows[i]);
-		}
-		res.render('home',{
-			data: list,
-			title: 'Product List'
-		});
-	});
-});
 
 
 app.get('/products/:id', (req,res)=>{
