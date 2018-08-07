@@ -207,6 +207,7 @@ app.get('/', function(req,res) {
 
 
 app.get('/products/:id', (req,res)=>{
+	console.log(req.body);
 	var id = req.params.id;
 	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
 		var list = [];
