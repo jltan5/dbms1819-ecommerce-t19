@@ -149,51 +149,47 @@ app.post('/', function(req,res) {
 
 
 
-app.get('/product/update/:id', (req,res)=>{	
+app.get('/product/update/:id', (req,res)=>{
 	var id = req.params.id;
-
-	client.query('SELECT * FROM products', (req, data)=>{
+	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
 		var list = [];
 		for (var i = 1; i < data.rows.length+1; i++) {
+			if (i==id) {
 				list.push(data.rows[i-1]);
+			}
 		}
-	client.query('SELECT * FROM products_category', (req, data)=>{
-		var list = [];
-		for (var i = 1; i < data.rows.length+1; i++) {
-				list.push(data.rows[i-1]);
-		}
-		client.query('SELECT * FROM brands', (req, data)=>{
+			client.query('SELECT * FROM products_category', (req, data)=>{
 			var list2 = [];
 			for (var i = 1; i < data.rows.length+1; i++) {
-					list2.push(data.rows[i-1]);
+				list2.push(data.rows[i-1]);
 			}
-			res.render('update',{
-				data3: list3,
-				data: list,
-				data2: list2,
-				title: 'Brand List'
+			client.query('SELECT * FROM brands', (req, data)=>{
+				var list3 = [];
+				for (var i = 1; i < data.rows.length+1; i++) {
+					list3.push(data.rows[i-1]);
+				}
+				res.render('product_update',{
+					products: list,
+					products_category: list2,
+					brands: list3
+				});
 			});
 		});
 	});
 });
-});
 
 
-app.post('/products/:id', function(req,res) {
+
+app.post('/products/:id', function(req,res){
+	console.log(req.body);
 	var id = req.params.id;
 	var values =[];
-	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.product_tagline,req.body.product_price,req.body.product_warranty,req.body.category_id,req.body.brand_id,req.body.image_link];
-	console.log(req.body);
+	values = [req.body.id,req.body.product_name,req.body.product_description,req.body.tagline,req.body.price,req.body.warranty,req.body.pic,req.body.category_id,req.body.brand_id];
+	//
+	//for updating via post -----------------------------------------------------WIP
 	console.log(values);
-	client.query("UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, category_id = $7, brand_id = 8, image = $9 WHERE id = $1", values, (err, res)=>{
-		if (err) {
-			console.log(err.stack)
-			}
-		else {
-			console.log(res.rows[0])
-		}
-	});
-	res.redirect('/');
+	client.query('UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, image = $7, category_id = $8, brand_id = $9 WHERE id = $1', values);
+	res.redirect('/products/:id');
 });
 
 
