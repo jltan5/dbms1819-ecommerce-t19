@@ -260,33 +260,34 @@ app.get('/orders', (req,res)=>{
 
 app.get('/customers/:id', (req,res)=>{
 	var id = req.params.id;
+	console.log(id);
 	client.query('SELECT orders.id, orders.customer_id, orders.product_id, orders.order_date, orders.quantity, customers.email, customers.first_name, customers.last_name, customers.street, customers.municipality, customers.province, customers.zipcode, products.name FROM orders INNER JOIN customers ON orders.customer_id = customers.id INNER JOIN products ON orders.product_id = products.id WHERE orders.customer_id = $1', [id], (err, data)=>{
 		if (err) {
 			console.log(err);
 		}
 		else{
-			var list = [];
+			var list5 = [];
 			console.log(data.rows);
 			for (var i = 1; i < data.rows.length+1; i++) {
-				list.push(data.rows[i-1]);
+				list5.push(data.rows[i-1]);
 			}
-			console.log(list[0]);
 			data.rows[0];
 			res.render('customer_detail',{
-				data: list,
-				first_name: list[0].first_name,
-				last_name: list[0].last_name,
-				customer_id: list[0].customer_id,
-				email: list[0].email,
-				street: list[0].street,
-				municipality: list[0].municipality,
-				province: list[0].province,
-				zipcode: list[0].zipcode
+				data: list5,
+				first_name: list5[0].first_name,
+				last_name: list5[0].last_name,
+				customer_id: list5[0].customer_id,
+				email: list5[0].email,
+				street: list5[0].street,
+				municipality: list5[0].municipality,
+				province: list5[0].province,
+				zipcode: list5[0].zipcode
 
 			});
 		}
 	});
 });
+
 
 
 
