@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
+	<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
 		  <ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
@@ -10,35 +10,27 @@
 						<a class="nav-link" href="/categories"><p font="Tekton Pro">Categories</p><span class="sr-only">(current)
 						</span></a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="/customers"><p font="Tekton Pro">Customers</p><span class="sr-only">(current)
+						</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/orders"><p font="Tekton Pro">Orders</p><span class="sr-only">(current)
 						</span></a>
 					</li>
 		        </ul>	
 		</nav>
 		<br>
-	
-		
-	<div>
 
+	<div>
 		<b><h1 class="mt-2 mb-0 text-center">{{title}}</h1></b>
-			
-			<center>
-				<a href="/product/create" type="button"  class="btn btn-info btn-sm" style="margin-bottom: 50px;">CREATE A PRODUCT</a>
-			</center>
-			
 		<div class="row mx-4">
 			{{#each data}}
-			<div class="col-lg-4 col-md-4 col-sm-12 mb-4 mx-auto">
-			<div class="card bg-primary text-light center">
-				<a href="/products/{{this.id}}" class="text-light">
-				<img class="card-img-top" src="{{this.image}}" width="400" height="300">
-			<div class="">
-			<h6 class="bg-primary text-center my-3">{{this.name}}</h6>
+			<div class="col-lg-3 col-md-3 col-sm-12 mb-5 mx-auto">
+				<div style="word-wrap: break-word;">
+					<a href="/customers/{{this.id}}"><font color="white">	<h5 class="bg-primary text-center p-3">{{this.first_name}}  {{this.last_name}}<br> {{this.email}}</h5></font></a>
 				</div>
-				</a>
 			</div>
-			</div>
-					{{/each}}
-			</div>
-			</div>
+			{{/each}}
+		</div>
+	</div>
