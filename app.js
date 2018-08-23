@@ -178,6 +178,18 @@ app.get('/', function(req,res) {
 	});
 });
 
+app.get('/user', function(req,res) {
+	client.query('SELECT * FROM Products', (req, data)=>{
+		var list = [];
+		for (var i = 0; i < data.rows.length; i++) {
+			list.push(data.rows[i]);
+		}
+		res.render('user',{
+			data: list,
+			title: 'PRODUCT LIST'
+		});
+	});
+});
 
 
 
@@ -239,6 +251,22 @@ app.get('/products/:id', (req,res)=>{
 			}
 		}
 		res.render('products',{
+			data: list
+		});
+	});
+});
+
+app.get('/description/:id', (req,res)=>{
+	console.log(req.body);
+	var id = req.params.id;
+	client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id' , (req, data)=>{
+		var list = [];
+		for (var i = 0; i < data.rows.length+1; i++) {
+			if (i==id) {
+				list.push(data.rows[i-1]);
+			}
+		}
+		res.render('description',{
 			data: list
 		});
 	});

@@ -1,32 +1,41 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
-		  <ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only"></span></a>
+<div style="background-color: white" >
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
+		  <ul class="navbar-nav mr-auto pb-0">
+		  			<li>
+		  				&nbsp
+		  			</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only"></span></a>
+						<a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="/categories"><p font="Tekton Pro">Categories</p><span class="sr-only">(current)
 						</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/customers"><p font="Tekton Pro">Customers</p><span class="sr-only">
+						<a class="nav-link" href="/customers"><p font="Tekton Pro">Customers</p><span class="sr-only">(current)
 						</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/orders"><p font="Tekton Pro">Orders</p><span class="sr-only">(current)
 						</span></a>
 					</li>
-		        </ul>	
+		        </ul>
+		        <img src="/logo19.png" width="10%" height="10%" style="float: right; margin-right: 3%;">	
 		</nav>
 		<br>
+	
 
 <h1 class="mt-0 mb-5 text-center">{{title}}</h1>
 <center>
 <form action="/categories" method="POST">
   Category name:
-  <input type="text" name="category_name"><br>
+  <input type="text" name="category_name" required><br><br><br>
   <input type="submit" value="Submit">
 </form> 
 </center>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="bg-dark p-2 " style="position: absolute; color: #d3d3d3; width: 100%; text-align: center; font-size: 0.8vw; bottom: 0;">© Copyright 2018     Developed by: Somido-Tan</div>
+</div>

@@ -1,5 +1,9 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
-		  <ul class="navbar-nav mr-auto">
+<div style="background-color: white" >
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
+		  <ul class="navbar-nav mr-auto pb-0">
+		  			<li>
+		  				&nbsp
+		  			</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
 					</li>
@@ -18,7 +22,8 @@
 						<a class="nav-link" href="/orders"><p font="Tekton Pro">Orders</p><span class="sr-only">(current)
 						</span></a>
 					</li>
-		        </ul>	
+		        </ul>
+		        <img src="/logo19.png" width="10%" height="10%" style="float: right; margin-right: 3%;">	
 		</nav>
 		<br>
 	
@@ -28,17 +33,17 @@
 		<b><h1 class="mt-2 mb-0 text-center">{{title}}</h1></b>
 			
 			<center>
-				<a href="/product/create" type="button"  class="btn btn-info btn-sm" style="margin-bottom: 50px;">CREATE A PRODUCT</a>
+				<a href="/product/create" type="button"  class="btn btn-secondary btn-sm" style="margin-bottom: 50px;">CREATE A PRODUCT</a>
 			</center>
 			
 		<div class="row mx-4">
 			{{#each data}}
 			<div class="col-lg-4 col-md-4 col-sm-12 mb-4 mx-auto">
-			<div class="card bg-primary text-light center">
-				<a href="/products/{{this.id}}" class="text-light">
+			<div class="card bg-dark text-light center">
+				<a href="/description/{{this.id}}" class="text-light">
 				<img class="card-img-top" src="{{this.image}}" width="400" height="300">
 			<div class="">
-			<h6 class="bg-primary text-center my-3">{{this.name}}</h6>
+			<h6 class="bg-dark text-center my-3">{{this.name}}</h6>
 				</div>
 				</a>
 			</div>
@@ -46,3 +51,6 @@
 					{{/each}}
 			</div>
 			</div>
+
+<div class="bg-dark p-2 " style=" color: #d3d3d3; width: 100%; text-align: center; font-size: 0.8vw; bottom: 0;">© Copyright 2018     Developed by: Somido-Tan</div>
+</div>

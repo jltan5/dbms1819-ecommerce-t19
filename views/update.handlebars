@@ -1,6 +1,10 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+<div style="background-color: white" >
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
+      <ul class="navbar-nav mr-auto pb-0">
+            <li>
+              &nbsp
+            </li>
+          <li class="nav-item active">
             <a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
@@ -18,11 +22,12 @@
             <a class="nav-link" href="/orders"><p font="Tekton Pro">Orders</p><span class="sr-only">(current)
             </span></a>
           </li>
-            </ul> 
+            </ul>
+            <img src="/logo19.png" width="10%" height="10%" style="float: right; margin-right: 3%;">  
     </nav>
 
 
-<h1 class="p-5 mt-0 mb-5 text-center">{{title}}</h1>
+<h1 class="p-5 mt-0 mb-1 text-center">{{title}}</h1>
 <center>
   {{#each products}}
 <form action="/products/{{this.id}}" method="POST">
@@ -60,7 +65,11 @@
  <tr><td> Image Link:</td><td>
   <input type="text" name="image_link"></td></tr>
 </table>
-
+<br><br>
   <input type="submit" value="UPDATE">
 </form> 
 </center>
+
+<br><br>
+<div class="bg-dark p-2 " style=" color: #d3d3d3; width: 100%; text-align: center; font-size: 0.8vw; bottom: 0;">© Copyright 2018     Developed by: Somido-Tan</div>
+</div>

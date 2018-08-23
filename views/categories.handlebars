@@ -1,39 +1,48 @@
-	<nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
-		  <ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only"></span></a>
+<div style="background-color: white" >
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
+		  <ul class="navbar-nav mr-auto pb-0">
+		  			<li>
+		  				&nbsp
+		  			</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only"></span></a>
+						<a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="/categories"><p font="Tekton Pro">Categories</p><span class="sr-only">(current)
 						</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/customers"><p font="Tekton Pro">Customers</p><span class="sr-only">
+						<a class="nav-link" href="/customers"><p font="Tekton Pro">Customers</p><span class="sr-only">(current)
 						</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/orders"><p font="Tekton Pro">Orders</p><span class="sr-only">(current)
 						</span></a>
 					</li>
-		        </ul>	
+		        </ul>
+		        <img src="/logo19.png" width="10%" height="10%" style="float: right; margin-right: 3%;">	
 		</nav>
 		<br>
+	
 
 	<div>
 		<b><h1 class="mt-2 mb-0 text-center">{{title}}</h1></b>
 		<center>
-				<a href="/category/create" type="button" class="btn btn-info btn-sm" style="margin-bottom: 50px;">CREATE A CATEGORY</a>
+				<a href="/category/create" type="button" class="btn btn-secondary btn-sm" style="margin-bottom: 50px;">CREATE A CATEGORY</a>
 		</center>
 		<div class="row mx-4">
 			{{#each data}}
 			<div class="col-lg-3 col-md-3 col-sm-12 mb-5 mx-auto">
 				<div style="word-wrap: break-word;">
-					<h5 class="bg-primary text-center p-3">{{this.category_name}}</h5>
+					<h5 class="bg-dark text-center text-light p-3">{{this.category_name}}</h5>
 				</div>
 			</div>
 			{{/each}}
 		</div>
 	</div>
+	<br><br><br><br><br><br><br><br><br><br>
+<div class="bg-dark p-2 " style=" position: absolute; color: #d3d3d3; width: 100%; text-align: center; font-size: 0.8vw; bottom: 0;">© Copyright 2018     Developed by: Somido-Tan</div>
+</div>

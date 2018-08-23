@@ -1,0 +1,53 @@
+<div style="background-color: white;">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
+		  <ul class="navbar-nav mr-auto pb-0">
+		  			<li>
+		  				&nbsp
+		  			</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><p font="Tekton Pro">Products</p><span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/brands"><p font="Tekton Pro">Brands</p><span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/categories"><p font="Tekton Pro">Categories</p><span class="sr-only">(current)
+						</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/customers"><p font="Tekton Pro">Customers</p><span class="sr-only">(current)
+						</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/orders"><p font="Tekton Pro">Orders</p><span class="sr-only">(current)
+						</span></a>
+					</li>
+		        </ul>
+		        <img src="/logo19.png" width="10%" height="10%" style="float: right; margin-right: 3%;">	
+		</nav>
+
+		<br>
+	<div class="container" >
+		{{#each data}}
+		<h1 class="mt-3 text-center">{{this.name}}</h1>
+		<div class="col-lg-5 col-md-5 col-sm-8 mb-0 mx-auto">
+		<div class="card bg-secondary text-light center">
+		<img class="card-img-top" src="{{this.image}}" alt="">
+		<div class="bg-secondary text-white p-3">
+		<h4 class="card-title">Brand: {{this.brand_name}}</h4>
+		<h5 class="card-title">₱ {{this.price}}.00</h5>
+		<p class="card-text">
+		<h7 class="card-title">Category: {{this.category_name}}</h7><br>
+		<h7 class="card-title">Description: {{this.description}}</h7><br>
+		<h7 class="card-title">Tagline: {{this.tagline}}</h7><br>
+		<h7 class="card-title">Warranty: {{this.warranty}} Year/s</h7><br>
+		</p>
+		<center><a href="/product/update/{{this.id}}" type="button" class="bg-dark text-white p-2">UPDATE</a></center>
+		</div>
+		</div>
+		</div>
+			{{/each}}
+		</div>
+	</div>
+<br>
+	<div class=" bg-dark p-2" style=" width: 100%; text-align: center; font-size: 10px; color: #d3d3d3; bottom: 0;">© Copyright 2018     Developed by: Somido-Tan</div>

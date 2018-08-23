@@ -8,6 +8,19 @@ CREATE TABLE "customers" (
   "province" VARCHAR(80),
   "zipcode" VARCHAR(80)
 );
+
+
+CREATE TABLE "products_category" (
+  "id" SERIAL PRIMARY KEY,
+  "category_name" VARCHAR(80)
+);
+
+CREATE TABLE "brands" (
+  "id" SERIAL PRIMARY KEY,
+  "brand_name" VARCHAR(80),
+  "description" VARCHAR(250)
+);
+
 CREATE TABLE "products" (
   "id" SERIAL PRIMARY KEY,
   "name" VARCHAR(80),
@@ -33,16 +46,4 @@ CREATE TABLE "customer_favorite_products" (
   "id" SERIAL PRIMARY KEY,
   "customer_id" INT REFERENCES customers(id),
   "product_id" INT REFERENCES products(id) 
-);
-
-
-CREATE TABLE "products_category" (
-  "id" SERIAL PRIMARY KEY,
-  "category_name" VARCHAR(80)
-);
-
-CREATE TABLE "brands" (
-  "id" SERIAL PRIMARY KEY,
-  "brand_name" VARCHAR(80),
-  "description" VARCHAR(250)
 );

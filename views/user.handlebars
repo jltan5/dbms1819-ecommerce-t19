@@ -1,0 +1,23 @@
+	
+	<div class="bg-primary" style="width: 100%; ">
+		<a class="px-5" href="/user"><img src="/logo19.png" width="10%" height="10%"></a>
+		<b><p class="text-right p-5" style="display: inline-block; float: right; font-size: 3vw;">{{title}}</font></b>
+	</div>	
+<br><br><br><br><br>
+
+		<div class="row mx-5">
+			{{#each data}}
+			<div class="col-lg-3 col-md-3 col-sm-6 mb-4 mx-auto">
+			<div class="card bg-primary text-light center">
+				<a href="/products/{{this.id}}" class="text-light">
+				<img class="card-img-top" src="{{this.image}}" width="200px" height="200px">
+			<div class="">
+			<h6 class="bg-primary text-center my-3">{{this.name}}</h6>
+				</div>
+				</a>
+			</div>
+			</div>
+					{{/each}}
+			</div>
+
+<footer class=" bg-primary p-2" style=" width: 100%; text-align: center; font-size: 10px; color: #d3d3d3; bottom: 0; position: absolute;">© Copyright 2018     Developed by: Somido-Tan</footer>
