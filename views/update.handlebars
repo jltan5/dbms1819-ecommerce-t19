@@ -30,43 +30,43 @@
 <h1 class="p-5 mt-0 mb-1 text-center">{{title}}</h1>
 <center>
   {{#each products}}
-<form action="/products/{{this.id}}" method="POST">
+<form  action="/products/{{this.id}}" method="POST">
   <table>
     <tr><td>
   Product id:</td><td>
-  <input type="text" readonly="" name="product_id" value="{{this.id}}"></td></tr>
+  <input class="container" type="text" readonly="" name="product_id" value="{{this.id}}"></td></tr>
   {{/each}}
  
  <tr><td>
   Product name:  </td><td>
-  <input type="text" name="product_name" placeholder="{{this.name}}"></td></tr>
+  <input class="container" type="text" name="product_name" required></td></tr>
  <tr><td> Product description: </td><td>
-  <input type="text" name="product_description" value="{{this.description}}"></td></tr>
+  <input class="container" type="text" name="product_description" required></td></tr>
  <tr><td>Product tagline: </td><td>
-  <input type="text" name="product_tagline" value="{{this.tagline}}"></td></tr>
+  <input  class="container"type="text" name="product_tagline" required"></td></tr>
  <tr><td> Product price: </td><td>
-  <input type="text" name="product_price" value="₱ {{this.price}}.00"></td></tr>
+  <input  class="container"type="text" name="product_price" required></td></tr>
  <tr><td> Product warranty: </td><td>
-  <input type="text" name="product_warranty" value="{{this.warranty}}"></td></tr>
+  <input class="container" type="text" name="product_warranty" required></td></tr>
  <tr><td> Product category: </td><td>
-  <select name="category_id" class="form" value="{{this.category_name}}">
+  <select name="category_id" class="form" required>
       <option value="">Pick a Category</option>
       {{#each category}}
       <option value="{{this.id}}">{{this.category_name}}</option>
       {{/each}}
      </select></td></tr>
  <tr><td> Product brand: </td><td>
-     <select name="brand_id" class="form" value="{{this.brand_name}}">
+     <select name="brand_id" class="form" required>
      <option value=''>Pick a Brand</option>
       {{#each brands}}
       <option value='{{this.id}}'>{{this.brand_name}}</option>
       {{/each}}
   </select></td></tr>
  <tr><td> Image Link:</td><td>
-  <input type="text" name="image_link" value="{{this.image}}"></td></tr>
+  <input class="container" type="text" name="image_link" required></td></tr>
 </table>
 <br><br>
-  <input type="submit" value="UPDATE">
+  <input  type="submit" value="UPDATE">
 </form> 
 </center>
 
