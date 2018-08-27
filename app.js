@@ -5,7 +5,6 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const PORT = process.env.PORT || 5000;
-// const url = require('url');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const client = new Client({
@@ -16,7 +15,7 @@ const client = new Client({
   port: 5432,
   ssl: true
 });
-// sample
+
 client.connect()
   .then(function () {
     console.log('connected to database!');
@@ -41,16 +40,36 @@ app.get('/brand/create', function (req, res) {
 app.post('/brands', function (req, res) {
   var values = [];
   values = [req.body.brand_name, req.body.brand_description];
+  var values1 = [];
+  values1 = req.body.brand_name;
   console.log(req.body);
   console.log(values);
-  client.query('INSERT INTO brands(brand_name, description) VALUES($1, $2)', values, (err, res) => {
-    if (err) {
-      console.log(err.stack);
+  client.query('SELECT brand_name FROM brands', (req, data) => {
+    var list;
+    var exist = 0;
+    console.log(values1);
+    console.log('compare');
+    for (var i = 0; i < data.rows.length; i++) {
+      list = data.rows[i].brand_name;
+      console.log(list);
+      if (list === values1) {
+        exist = 1;
+      }
+    }
+    if (exist === 1) {
+      res.render('invalid');
     } else {
-      console.log(res.rows[0]);
+      console.log(values);
+      client.query('INSERT INTO brands(brand_name, description) VALUES($1, $2)', values, (err, res) => {
+        if (err) {
+          console.log(err.stack);
+        } else {
+          console.log(res.rows[0]);
+        }
+      });
+      res.redirect('/brands');
     }
   });
-  res.redirect('/brands');
 });
 
 app.get('/brands', function (req, res) {
@@ -73,17 +92,35 @@ app.get('/category/create', function (req, res) {
 
 app.post('/categories', function (req, res) {
   var values = [];
-  values = [req.body.category_name];
+  values = req.body.brand_name;
   console.log(req.body);
   console.log(values);
-  client.query('INSERT INTO products_category(category_name) VALUES($1)', values, (err, res) => {
-    if (err) {
-      console.log(err.stack);
+  client.query('SELECT category_name FROM products_category', (req, data) => {
+    var list;
+    var exist = 0;
+    console.log(values);
+    console.log('compare');
+    for (var i = 0; i < data.rows.length; i++) {
+      list = data.rows[i].brand_name;
+      console.log(list);
+      if (list === values) {
+        exist = 1;
+      }
+    }
+    if (exist === 1) {
+      res.render('invalid');
     } else {
-      console.log(res.rows[0]);
+      console.log(values);
+      client.query('INSERT INTO products_category(category_name) VALUES($1)', values, (err, res) => {
+        if (err) {
+          console.log(err.stack);
+        } else {
+          console.log(res.rows[0]);
+        }
+      });
+      res.redirect('/categories');
     }
   });
-  res.redirect('/categories');
 });
 
 app.get('/categories', function (req, res) {
@@ -132,7 +169,7 @@ app.get('/product/create', (req, res) => {
   });
 });
 
-app.post('/', function (req, res) {
+app.post('/admin', function (req, res) {
   var values = [];
   values = [req.body.product_name, req.body.product_description, req.body.product_tagline, req.body.product_price, req.body.product_warranty, req.body.category_id, req.body.brand_id, req.body.image_link];
   console.log(req.body);
@@ -144,10 +181,10 @@ app.post('/', function (req, res) {
       console.log(res.rows[0]);
     }
   });
-  res.redirect('/');
+  res.redirect('/admin');
 });
 
-app.get('/', function (req, res) {
+app.get('/admin', function (req, res) {
   client.query('SELECT * FROM Products', (req, data) => {
     var list = [];
     for (var i = 0; i < data.rows.length; i++) {
@@ -158,6 +195,10 @@ app.get('/', function (req, res) {
       title: 'Product List'
     });
   });
+});
+
+app.get('/', function (req, res) {
+  res.render('index');
 });
 
 app.get('/user', function (req, res) {
