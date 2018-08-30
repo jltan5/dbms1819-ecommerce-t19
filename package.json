@@ -14,9 +14,11 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js":["eslint", "git add"]
+    "*.js": [
+      "eslint",
+      "git add"
+    ]
   },
-
   "author": "John Loyd Tan",
   "license": "MIT",
   "dependencies": {
@@ -24,6 +26,7 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.11",
+    "moment": "^2.22.2",
     "nodemailer": "^4.6.7",
     "nodemon": "^1.18.3",
     "npm": "^6.4.0",

@@ -4,6 +4,7 @@ const { Client } = require('pg');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const moment = require('moment');
 const PORT = process.env.PORT || 5000;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -41,7 +42,7 @@ app.post('/brands', function (req, res) {
   var values = [];
   values = [req.body.brand_name, req.body.brand_description];
   var values1 = [];
-  values1 = req.body.brand_name;
+  values1 = [req.body.brand_name];
   console.log(req.body);
   console.log(values);
   client.query('SELECT brand_name FROM brands', (req, data) => {
@@ -92,7 +93,7 @@ app.get('/category/create', function (req, res) {
 
 app.post('/categories', function (req, res) {
   var values = [];
-  values = req.body.brand_name;
+  values = [req.body.category_name];
   console.log(req.body);
   console.log(values);
   client.query('SELECT category_name FROM products_category', (req, data) => {
@@ -101,7 +102,7 @@ app.post('/categories', function (req, res) {
     console.log(values);
     console.log('compare');
     for (var i = 0; i < data.rows.length; i++) {
-      list = data.rows[i].brand_name;
+      list = data.rows[i].category_name;
       console.log(list);
       if (list === values) {
         exist = 1;
@@ -174,14 +175,31 @@ app.post('/admin', function (req, res) {
   values = [req.body.product_name, req.body.product_description, req.body.product_tagline, req.body.product_price, req.body.product_warranty, req.body.category_id, req.body.brand_id, req.body.image_link];
   console.log(req.body);
   console.log(values);
-  client.query('INSERT INTO products(name, description, tagline, price, warranty, category_id, brand_id, image) VALUES($1, $2, $3, $4, $5, $6, $7, $8)', values, (err, res) => {
-    if (err) {
-      console.log(err.stack);
+  client.query('SELECT name FROM products', (req, data) => {
+    var list;
+    var exist = 0;
+    console.log('compare');
+    for (var i = 0; i < data.rows.length; i++) {
+      list = data.rows[i].name;
+      console.log(list);
+      if (list === values[0]) {
+        exist = 1;
+      }
+    }
+    if (exist === 1) {
+      res.render('invalid');
     } else {
-      console.log(res.rows[0]);
+      console.log(values);
+      client.query('INSERT INTO products(name, description, tagline, price, warranty, category_id, brand_id, image) VALUES($1, $2, $3, $4, $5, $6, $7, $8)', values, (err, res) => {
+        if (err) {
+          console.log(err.stack);
+        } else {
+          console.log(res.rows[0]);
+        }
+      });
+      res.redirect('/admin');
     }
   });
-  res.redirect('/admin');
 });
 
 app.get('/admin', function (req, res) {
@@ -246,17 +264,17 @@ app.get('/product/update/:id', (req, res) => {
 
 app.post('/products/:id', function (req, res) {
   console.log(req.body);
-  var id = req.params.id;
+  var id = parseInt(req.params.id);
   var values = [];
   values = [req.body.product_id, req.body.product_name, req.body.product_description, req.body.product_tagline, req.body.product_price, req.body.product_warranty, req.body.image_link, req.body.category_id, req.body.brand_id];
   console.log(values);
   client.query('UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, image = $7, category_id = $8, brand_id = $9 WHERE id = $1', values);
-  res.redirect('/products/' + id);
+  res.redirect('/description/' + id);
 });
 
 app.get('/products/:id', (req, res) => {
   console.log(req.body);
-  var id = req.params.id;
+  var id = parseInt(req.params.id);
   client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id', (req, data) => {
     var list = [];
     for (var i = 0; i < data.rows.length + 1; i++) {
@@ -271,18 +289,18 @@ app.get('/products/:id', (req, res) => {
 });
 
 app.get('/description/:id', (req, res) => {
-  console.log(req.body);
-  var id = req.params.id;
-  client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id', (req, data) => {
-    var list = [];
+  var id = parseInt(req.params.id);
+  client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id', (req, data) => {
+    var listz = [];
     for (var i = 0; i < data.rows.length + 1; i++) {
       if (i === id) {
-        list.push(data.rows[i - 1]);
+        listz.push(data.rows[i - 1]);
       }
     }
     res.render('description', {
-      data: list
+      data: listz
     });
+    console.log(data);
   });
 });
 
@@ -329,9 +347,10 @@ app.get('/customers/:id', (req, res) => {
 app.post('/products/:id/send', function (req, res) {
   console.log(req.body);
   var id = req.params.id;
+  var orderDate = moment().format('llll [GMT+8]');
   var email = req.body.email;
   var customersValues = [req.body.email, req.body.fname, req.body.lname, req.body.street, req.body.municipality, req.body.province, req.body.zipcode];
-  var ordersValues = [req.body.product_id, req.body.quantity];
+  var ordersValues = [req.body.product_id, req.body.quantity, orderDate];
   const output1 = `
     <p>Your Order Request has been sent to the seller!</p>
     <h3>Order Details</h3>
@@ -376,9 +395,9 @@ app.post('/products/:id/send', function (req, res) {
         } else {
           console.log(data.rows);
           console.log('got customer id');
-          ordersValues[2] = data.rows[0].id;
+          ordersValues[3] = data.rows[0].id;
           console.log(ordersValues + '<====');
-          client.query('INSERT INTO orders(product_id, quantity, customer_id) VALUES($1, $2, $3)', ordersValues, (req, data) => {
+          client.query('INSERT INTO orders(product_id, quantity, order_date, customer_id) VALUES($1, $2, $3, $4)', ordersValues, (req, data) => {
             let transporter = nodemailer.createTransport({
               host: 'smtp.gmail.com',
               port: 465,
@@ -435,9 +454,9 @@ app.post('/products/:id/send', function (req, res) {
             } else {
               console.log(data.rows);
               console.log('got customer id');
-              ordersValues[2] = data.rows[0].lastval;
+              ordersValues[3] = data.rows[0].lastval;
               console.log(ordersValues + '<====');
-              client.query('INSERT INTO orders(product_id, quantity, customer_id) VALUES($1, $2, $3)', ordersValues, (req, data) => {
+              client.query('INSERT INTO orders(product_id, quantity, order_date, customer_id) VALUES($1, $2, $3, $4)', ordersValues, (req, data) => {
                 let transporter = nodemailer.createTransport({
                   host: 'smtp.gmail.com',
                   port: 465,
