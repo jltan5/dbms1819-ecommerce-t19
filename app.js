@@ -33,6 +33,62 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var Product = require('./models/product');
+// var Brand = require('./models/brand');
+// var Category = require('./models/category');
+// var Order = require('./models/order');
+// var Customer = require('./models/customer');
+
+app.get('/user', function (req, res) {
+  Product.list(client, {}, function (list) {
+    res.render('user', {
+      data: list,
+      title: 'PRODUCT LIST'
+    });
+  });
+});
+
+app.get('/admin', function (req, res) {
+  Product.list(client, {}, function (list) {
+    res.render('home', {
+      data: list,
+      title: 'PRODUCT LIST'
+    });
+  });
+});
+
+app.post('/admin', function (req, res) {
+  var values = [];
+  values = [req.body.product_name, req.body.product_description, req.body.product_tagline, req.body.product_price, req.body.product_warranty, req.body.category_id, req.body.brand_id, req.body.image_link];
+  console.log(req.body);
+  console.log(values);
+  client.query('SELECT name FROM products', (req, data) => {
+    var list;
+    var exist = 0;
+    console.log('compare');
+    for (var i = 0; i < data.rows.length; i++) {
+      list = data.rows[i].name;
+      console.log(list);
+      if (list === values[0]) {
+        exist = 1;
+      }
+    }
+    if (exist === 1) {
+      res.render('invalid');
+    } else {
+      console.log(values);
+      client.query('INSERT INTO products(name, description, tagline, price, warranty, category_id, brand_id, image) VALUES($1, $2, $3, $4, $5, $6, $7, $8)', values, (err, res) => {
+        if (err) {
+          console.log(err.stack);
+        } else {
+          console.log(res.rows[0]);
+        }
+      });
+      res.redirect('/admin');
+    }
+  });
+});
+
 app.get('/brand/create', function (req, res) {
   res.render('brandcreate', {
     title: 'Create a Brand'});
@@ -254,66 +310,8 @@ app.get('/product/create', (req, res) => {
   });
 });
 
-app.post('/admin', function (req, res) {
-  var values = [];
-  values = [req.body.product_name, req.body.product_description, req.body.product_tagline, req.body.product_price, req.body.product_warranty, req.body.category_id, req.body.brand_id, req.body.image_link];
-  console.log(req.body);
-  console.log(values);
-  client.query('SELECT name FROM products', (req, data) => {
-    var list;
-    var exist = 0;
-    console.log('compare');
-    for (var i = 0; i < data.rows.length; i++) {
-      list = data.rows[i].name;
-      console.log(list);
-      if (list === values[0]) {
-        exist = 1;
-      }
-    }
-    if (exist === 1) {
-      res.render('invalid');
-    } else {
-      console.log(values);
-      client.query('INSERT INTO products(name, description, tagline, price, warranty, category_id, brand_id, image) VALUES($1, $2, $3, $4, $5, $6, $7, $8)', values, (err, res) => {
-        if (err) {
-          console.log(err.stack);
-        } else {
-          console.log(res.rows[0]);
-        }
-      });
-      res.redirect('/admin');
-    }
-  });
-});
-
-app.get('/admin', function (req, res) {
-  client.query('SELECT * FROM Products', (req, data) => {
-    var list = [];
-    for (var i = 0; i < data.rows.length; i++) {
-      list.push(data.rows[i]);
-    }
-    res.render('home', {
-      data: list,
-      title: 'Product List'
-    });
-  });
-});
-
 app.get('/', function (req, res) {
   res.render('index');
-});
-
-app.get('/user', function (req, res) {
-  client.query('SELECT * FROM Products', (req, data) => {
-    var list = [];
-    for (var i = 0; i < data.rows.length; i++) {
-      list.push(data.rows[i]);
-    }
-    res.render('user', {
-      data: list,
-      title: 'PRODUCT LIST'
-    });
-  });
 });
 
 app.get('/product/update/:id', (req, res) => {
