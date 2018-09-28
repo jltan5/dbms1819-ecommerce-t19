@@ -40,7 +40,7 @@ var Product = require('./models/product');
 // var Customer = require('./models/customer');
 
 app.get('/user', function (req, res) {
-  Product.list(client, {}, function (list) {
+  Product.products(client, {}, function (list) {
     res.render('user', {
       data: list,
       title: 'PRODUCT LIST'
@@ -49,12 +49,121 @@ app.get('/user', function (req, res) {
 });
 
 app.get('/admin', function (req, res) {
-  Product.list(client, {}, function (list) {
+  Product.products(client, {}, function (list) {
     res.render('home', {
       data: list,
       title: 'PRODUCT LIST'
     });
   });
+});
+
+app.get('/brands', function (req, res) {
+  Product.brands(client, {}, function (list1) {
+    res.render('brands', {
+      data: list1,
+      title: 'Brand List'
+    });
+  });
+});
+
+app.get('/categories', function (req, res) {
+  Product.categories(client, {}, function (list2) {
+    res.render('categories', {
+      data: list2,
+      title: 'Category List'
+    });
+  });
+});
+
+app.get('/customers', function (req, res) {
+  Product.customers(client, {}, function (list3) {
+    res.render('customers', {
+      data: list3,
+      title: 'Customer List'
+    });
+  });
+});
+
+app.get('/product/create', (req, res) => {
+  Product.categories(client, {}, function (list4) {
+    Product.brands(client, {}, function (list5) {
+      res.render('productcreate', {
+        data: list4,
+        data2: list5,
+        title: 'Create Product'
+      });
+    });
+  });
+});
+
+app.get('/product/update/:id', (req, res) => {
+  client.query('SELECT * FROM products_category', (req, data) => {
+    var list2 = [];
+    for (var i = 1; i < data.rows.length + 1; i++) {
+      list2.push(data.rows[i - 1]);
+    }
+    client.query('SELECT * FROM brands', (req, data) => {
+      var list3 = [];
+      for (var i = 1; i < data.rows.length + 1; i++) {
+        list3.push(data.rows[i - 1]);
+      }
+      res.render('update', {
+        category: list2,
+        brands: list3,
+        title: 'Update Product'
+      });
+    });
+  });
+});
+
+app.get('/products/:id', (req, res) => {
+  console.log(req.body);
+  var id = parseInt(req.params.id);
+  client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id', (req, data) => {
+    var list = [];
+    for (var i = 0; i < data.rows.length + 1; i++) {
+      if (i === id) {
+        list.push(data.rows[i - 1]);
+      }
+    }
+    res.render('products', {
+      data: list
+    });
+  });
+});
+
+app.get('/orders', (req, res) => {
+  client.query('SELECT * FROM orders', (req, data) => {
+    var list = [];
+    for (var i = 1; i < data.rows.length + 1; i++) {
+      list.push(data.rows[i - 1]);
+    }
+    res.render('orders', {
+      data: list
+    });
+  });
+});
+
+app.get('/login', function (req, res) {
+  res.render('login');
+});
+
+app.get('/brand/create', function (req, res) {
+  res.render('brandcreate', {
+    title: 'Create a Brand'});
+});
+
+app.get('/register', function (req, res) {
+  res.render('register');
+});
+
+app.get('/category/create', function (req, res) {
+  res.render('categorycreate', {
+    title: 'Create a Category'});
+});
+
+app.get('/', function (req, res) {
+  res.render('index');
 });
 
 app.post('/admin', function (req, res) {
@@ -87,11 +196,6 @@ app.post('/admin', function (req, res) {
       res.redirect('/admin');
     }
   });
-});
-
-app.get('/brand/create', function (req, res) {
-  res.render('brandcreate', {
-    title: 'Create a Brand'});
 });
 
 app.post('/brands', function (req, res) {
@@ -129,106 +233,14 @@ app.post('/brands', function (req, res) {
   });
 });
 
-app.get('/brands', function (req, res) {
-  client.query('SELECT * FROM Brands', (req, data) => {
-    var list = [];
-    for (var i = 0; i < data.rows.length; i++) {
-      list.push(data.rows[i]);
-    }
-    res.render('brands', {
-      data: list,
-      title: 'Brand List'
-    });
-  });
-});
-
-app.get('/login', function (req, res) {
-  res.render('login');
-});
-
 app.post('/login', function (req, res) {
   console.log(req.body);
   res.render('login');
 });
 
-app.get('/register', function (req, res) {
-  res.render('register');
-});
-
 app.post('/register', function (req, res) {
   console.log(req.body);
   res.render('register');
-});
-
-// app.get('/dashboard', function (req, res) {
-//   client.query('select customers.first_name, customers.last_name, count(orders.id) from customers inner join orders on customers.id = orders.customer_id group by customers.first_name, customers.last_name order by count(orders.id) desc limit 10', (req, data) => {
-//     var customorder = [];
-//     for (var i = 0; i < data.rows.length; i++) {
-//       customorder.push(data.rows[i]);
-//     }
-//     client.query('select customers.first_name, customers.last_name, count(orders.id) from customers inner join orders on customers.id = orders.customer_id group by customers.first_name, customers.last_name order by count(orders.id) desc limit 10', (req, data) => {
-//     var custompayment = [];
-//     for (var i = 0; i < data.rows.length; i++) {
-//     custompayment.push(data.rows[i]);
-//     }
-//     client.query('SELECT product_id, products.name, SUM (quantity) FROM orders inner join products on products.id = orders.product_id GROUP BY customer_id,products.name,orders.product_id order by SUM DESC limit 10', (req, data) => {
-//     var mostproducts = [];
-//     for (var i = 0; i < data.rows.length; i++) {
-//       mostproducts.push(data.rows[i]);
-//     }
-//     client.query('SELECT product_id, products.name, SUM (product_id) FROM orders inner join products on products.id = orders.product_id GROUP BY customer_id,products.name,orders.product_id order by SUM ASC limit 10', (req, data) => {
-//     var leastproducts = [];
-//     for (var i = 0; i < data.rows.length; i++) {
-//       leastproducts.push(data.rows[i]);
-//     }
-//     client.query('SELECT DISTINCT brands.brand_name, sum (orders.quantity) FROM orders inner join products on products.id = orders.product_id inner join brands on brands.id = products.brand_id GROUP BY brands.brand_name order by sum DESC limit 3', (req, data) => {
-//     var mostbrands = [];
-//     for (var i = 0; i < data.rows.length; i++) {
-//       mostbrands.push(data.rows[i]);
-//     }
-//     client.query('SELECT DISTINCT products_category.category_name, sum (orders.quantity) FROM orders inner join products on products.id = orders.product_id inner join products_category on products_category.id = products.category_id GROUP BY products_category.category_name order by sum DESC limit 3', (req, data) => {
-//     var mostcategories = [];
-//     for (var i = 0; i < data.rows.length; i++) {
-//       mostcategories.push(data.rows[i]);
-//     }
-//    client.query('SELECT  SUM (orders.quantity * products.price) as total FROM orders inner join products on products.id = orders.product_id inner join customers on customers.id = orders.customer_id WHERE order_date BETWEEN CURRENT_DATE - INTERVAL '7 days' AND CURRENT_DATE + INTERVAL '1 days'', (req, data) => {
-//    var weekly = [];
-//    for (var i = 0; i < data.rows.length; i++) {
-//      weekly.push(data.rows[i]);
-//    }
-//    client.query('SELECT  SUM (orders.quantity * products.price) as total FROM orders inner join products on products.id = orders.product_id inner join customers on customers.id = orders.customer_id WHERE order_date BETWEEN CURRENT_DATE - INTERVAL '30 days' AND CURRENT_DATE + INTERVAL '1 days'', (req, data) => {
-//    var monthly = [];
-//    for (var i = 0; i < data.rows.length; i++) {
-//      monthly.push(data.rows[i]);
-//    }
-//    client.query('SELECT  COUNT (orders.id) FROM orders WHERE order_date BETWEEN CURRENT_DATE - INTERVAL '1 days' AND CURRENT_DATE + INTERVAL '1 days'', (req, data) => {
-//    var daily = [];
-//    for (var i = 0; i < data.rows.length; i++) {
-//     daily.push(data.rows[i]);
-//    }
-//     res.render('dashboard', {
-//       data: customorder,
-//       data2: custompayment,
-//       data3: mostproducts,
-//       data4: leastproducts,
-//       data5: mostbrands,
-//       data6: mostcategories,
-// //      data7: weekly,
-// //      data8: monthly,
-// //      data9: daily,
-//       title: 'DashBoard'
-//     });
-//   });
-// });
-// });
-// });
-// });
-// });
-// });
-
-app.get('/category/create', function (req, res) {
-  res.render('categorycreate', {
-    title: 'Create a Category'});
 });
 
 app.post('/categories', function (req, res) {
@@ -264,86 +276,6 @@ app.post('/categories', function (req, res) {
   });
 });
 
-app.get('/categories', function (req, res) {
-  client.query('SELECT * FROM products_category', (req, data) => {
-    var list = [];
-    for (var i = 0; i < data.rows.length; i++) {
-      list.push(data.rows[i]);
-    }
-    res.render('categories', {
-      data: list,
-      title: 'Category List'
-    });
-  });
-});
-
-app.get('/customers', function (req, res) {
-  client.query('SELECT * FROM customers', (req, data) => {
-    var list = [];
-    for (var i = 0; i < data.rows.length; i++) {
-      list.push(data.rows[i]);
-    }
-    res.render('customers', {
-      data: list,
-      title: 'Customer List'
-    });
-  });
-});
-
-app.get('/product/create', (req, res) => {
-  client.query('SELECT * FROM products_category', (req, data) => {
-    var list = [];
-    for (var i = 1; i < data.rows.length + 1; i++) {
-      list.push(data.rows[i - 1]);
-    }
-    client.query('SELECT * FROM brands', (req, data) => {
-      var list2 = [];
-      for (var i = 1; i < data.rows.length + 1; i++) {
-        list2.push(data.rows[i - 1]);
-      }
-      res.render('productcreate', {
-        data: list,
-        data2: list2,
-        title: 'Create Product'
-      });
-    });
-  });
-});
-
-app.get('/', function (req, res) {
-  res.render('index');
-});
-
-app.get('/product/update/:id', (req, res) => {
-  var id = req.params.id;
-  client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id', (req, data) => {
-    var list = [];
-    for (var i = 1; i < data.rows.length + 1; i++) {
-      if (i === id) {
-        list.push(data.rows[i - 1]);
-      }
-    }
-    client.query('SELECT * FROM products_category', (req, data) => {
-      var list2 = [];
-      for (var i = 1; i < data.rows.length + 1; i++) {
-        list2.push(data.rows[i - 1]);
-      }
-      client.query('SELECT * FROM brands', (req, data) => {
-        var list3 = [];
-        for (var i = 1; i < data.rows.length + 1; i++) {
-          list3.push(data.rows[i - 1]);
-        }
-        res.render('update', {
-          products: list,
-          category: list2,
-          brands: list3,
-          title: 'Update Product'
-        });
-      });
-    });
-  });
-});
-
 app.post('/products/:id', function (req, res) {
   console.log(req.body);
   var id = parseInt(req.params.id);
@@ -352,22 +284,6 @@ app.post('/products/:id', function (req, res) {
   console.log(values);
   client.query('UPDATE products SET name = $2, description = $3, tagline = $4, price = $5, warranty = $6, image = $7, category_id = $8, brand_id = $9 WHERE id = $1', values);
   res.redirect('/description/' + id);
-});
-
-app.get('/products/:id', (req, res) => {
-  console.log(req.body);
-  var id = parseInt(req.params.id);
-  client.query('SELECT products.id, products.name, products.description, products.tagline, products.price, products.warranty, products.image, products.category_id, products_category.category_name, products.brand_id, brands.brand_name FROM products INNER JOIN products_category ON products.category_id = products_category.id INNER JOIN brands ON products.brand_id = brands.id ORDER BY products.id', (req, data) => {
-    var list = [];
-    for (var i = 0; i < data.rows.length + 1; i++) {
-      if (i === id) {
-        list.push(data.rows[i - 1]);
-      }
-    }
-    res.render('products', {
-      data: list
-    });
-  });
 });
 
 app.get('/description/:id', (req, res) => {
@@ -383,18 +299,6 @@ app.get('/description/:id', (req, res) => {
       data: listz
     });
     console.log(data);
-  });
-});
-
-app.get('/orders', (req, res) => {
-  client.query('SELECT * FROM orders', (req, data) => {
-    var list = [];
-    for (var i = 1; i < data.rows.length + 1; i++) {
-      list.push(data.rows[i - 1]);
-    }
-    res.render('orders', {
-      data: list
-    });
   });
 });
 

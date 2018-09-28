@@ -34,36 +34,35 @@
   <table>
     <tr><td>
   Product id:</td><td>
-  <input class="container" type="text" readonly="" name="product_id" value="{{this.id}}"></td></tr>
+  <input  type="text" readonly="" name="product_id" value="{{this.id}}"></td></tr>
   {{/each}}
- 
  <tr><td>
   Product name:  </td><td>
-  <input class="container" type="text" name="product_name" required></td></tr>
+  <input  type="text" name="product_name" required=""></td></tr><br>
  <tr><td> Product description: </td><td>
-  <input class="container" type="text" name="product_description" required></td></tr>
+  <input  type="text" name="product_description" required=""></td></tr><br>
  <tr><td>Product tagline: </td><td>
-  <input  class="container"type="text" name="product_tagline" required"></td></tr>
+  <input  type="text" name="product_tagline" required=""></td></tr><br>
  <tr><td> Product price: </td><td>
-  <input  class="container"type="text" name="product_price" required></td></tr>
+  <input  type="text" name="product_price" required=""></td></tr><br>
  <tr><td> Product warranty: </td><td>
-  <input class="container" type="text" name="product_warranty" required></td></tr>
+  <input  type="text" name="product_warranty" required=""></td></tr><br>
  <tr><td> Product category: </td><td>
-  <select name="category_id" class="form" required>
+  <select name="category_id" class="form" required="">
       <option value="">Pick a Category</option>
       {{#each category}}
       <option value="{{this.id}}">{{this.category_name}}</option>
       {{/each}}
-     </select></td></tr>
+     </select></td></tr><br>
  <tr><td> Product brand: </td><td>
-     <select name="brand_id" class="form" required>
+     <select name="brand_id" class="form" required="">
      <option value=''>Pick a Brand</option>
       {{#each brands}}
       <option value='{{this.id}}'>{{this.brand_name}}</option>
       {{/each}}
-  </select></td></tr>
+  </select></td></tr><br>
  <tr><td> Image Link:</td><td>
-  <input class="container" type="text" name="image_link" required></td></tr>
+  <input  type="text" name="image_link" required=""></td></tr>
 </table>
 <br><br>
   <input  type="submit" value="UPDATE">
