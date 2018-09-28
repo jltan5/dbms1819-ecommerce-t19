@@ -86,6 +86,90 @@ app.get('/brands', function (req, res) {
   });
 });
 
+app.get('/login', function (req, res) {
+  res.render('login');
+});
+
+app.post('/login', function (req, res) {
+  console.log(req.body);
+  res.render('login');
+});
+
+app.get('/register', function (req, res) {
+  res.render('register');
+});
+
+app.post('/register', function (req, res) {
+  console.log(req.body);
+  res.render('register');
+});
+
+// app.get('/dashboard', function (req, res) {
+//   client.query('select customers.first_name, customers.last_name, count(orders.id) from customers inner join orders on customers.id = orders.customer_id group by customers.first_name, customers.last_name order by count(orders.id) desc limit 10', (req, data) => {
+//     var customorder = [];
+//     for (var i = 0; i < data.rows.length; i++) {
+//       customorder.push(data.rows[i]);
+//     }
+//     client.query('select customers.first_name, customers.last_name, count(orders.id) from customers inner join orders on customers.id = orders.customer_id group by customers.first_name, customers.last_name order by count(orders.id) desc limit 10', (req, data) => {
+//     var custompayment = [];
+//     for (var i = 0; i < data.rows.length; i++) {
+//     custompayment.push(data.rows[i]);
+//     }
+//     client.query('SELECT product_id, products.name, SUM (quantity) FROM orders inner join products on products.id = orders.product_id GROUP BY customer_id,products.name,orders.product_id order by SUM DESC limit 10', (req, data) => {
+//     var mostproducts = [];
+//     for (var i = 0; i < data.rows.length; i++) {
+//       mostproducts.push(data.rows[i]);
+//     }
+//     client.query('SELECT product_id, products.name, SUM (product_id) FROM orders inner join products on products.id = orders.product_id GROUP BY customer_id,products.name,orders.product_id order by SUM ASC limit 10', (req, data) => {
+//     var leastproducts = [];
+//     for (var i = 0; i < data.rows.length; i++) {
+//       leastproducts.push(data.rows[i]);
+//     }
+//     client.query('SELECT DISTINCT brands.brand_name, sum (orders.quantity) FROM orders inner join products on products.id = orders.product_id inner join brands on brands.id = products.brand_id GROUP BY brands.brand_name order by sum DESC limit 3', (req, data) => {
+//     var mostbrands = [];
+//     for (var i = 0; i < data.rows.length; i++) {
+//       mostbrands.push(data.rows[i]);
+//     }
+//     client.query('SELECT DISTINCT products_category.category_name, sum (orders.quantity) FROM orders inner join products on products.id = orders.product_id inner join products_category on products_category.id = products.category_id GROUP BY products_category.category_name order by sum DESC limit 3', (req, data) => {
+//     var mostcategories = [];
+//     for (var i = 0; i < data.rows.length; i++) {
+//       mostcategories.push(data.rows[i]);
+//     }
+//    client.query('SELECT  SUM (orders.quantity * products.price) as total FROM orders inner join products on products.id = orders.product_id inner join customers on customers.id = orders.customer_id WHERE order_date BETWEEN CURRENT_DATE - INTERVAL '7 days' AND CURRENT_DATE + INTERVAL '1 days'', (req, data) => {
+//    var weekly = [];
+//    for (var i = 0; i < data.rows.length; i++) {
+//      weekly.push(data.rows[i]);
+//    }
+//    client.query('SELECT  SUM (orders.quantity * products.price) as total FROM orders inner join products on products.id = orders.product_id inner join customers on customers.id = orders.customer_id WHERE order_date BETWEEN CURRENT_DATE - INTERVAL '30 days' AND CURRENT_DATE + INTERVAL '1 days'', (req, data) => {
+//    var monthly = [];
+//    for (var i = 0; i < data.rows.length; i++) {
+//      monthly.push(data.rows[i]);
+//    }
+//    client.query('SELECT  COUNT (orders.id) FROM orders WHERE order_date BETWEEN CURRENT_DATE - INTERVAL '1 days' AND CURRENT_DATE + INTERVAL '1 days'', (req, data) => {
+//    var daily = [];
+//    for (var i = 0; i < data.rows.length; i++) {
+//     daily.push(data.rows[i]);
+//    }
+//     res.render('dashboard', {
+//       data: customorder,
+//       data2: custompayment,
+//       data3: mostproducts,
+//       data4: leastproducts,
+//       data5: mostbrands,
+//       data6: mostcategories,
+// //      data7: weekly,
+// //      data8: monthly,
+// //      data9: daily,
+//       title: 'DashBoard'
+//     });
+//   });
+// });
+// });
+// });
+// });
+// });
+// });
+
 app.get('/category/create', function (req, res) {
   res.render('categorycreate', {
     title: 'Create a Category'});
